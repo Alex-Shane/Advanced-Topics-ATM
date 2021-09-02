@@ -8,46 +8,45 @@ public class atm {
 	}
 	
 	
-	public void deposit(String name, double amount)
+	public void deposit(String id, double amount)
 	{
 		if (amount < 0)
 		{
 			System.out.println ("Can't deposit a negative amount");
 		    return;
 		}
-		else if (bankAccounts.isEmpty() || bankAccounts.containsKey((name))==false)
+		else if (bankAccounts.isEmpty() || bankAccounts.containsKey((id))==false)
 		{
-			bankAccounts.put(name, amount);
+			bankAccounts.put(id, amount);
 			//System.out.println ("ID didn't exist. Created and Deposited " + amount);
 		}
 		else
 		{
-			double oldMoney = (double) bankAccounts.get(name);
-			bankAccounts.put(name, oldMoney + amount);
+			double oldMoney = (double) bankAccounts.get(id);
+			bankAccounts.put(id, oldMoney + amount);
 			//System.out.println ("ID existed. Deposited " + amount + ". There is now " + bankAccounts.get(this.iD) + " in this account.");
 		}
 	}
-	public void withdraw (String ident, double cash) {
-		if (bankAccounts.containsKey(ident)==false) {
+	public void withdraw (String id, double cash) {
+		if (bankAccounts.containsKey(id)==false) {
 			System.out.println("Sorry your bank account doesnt exsist"); 
 			return; 
 		}
-		double currentMon= bankAccounts.get(ident); 
+		double currentMon= bankAccounts.get(id); 
 		if (cash>currentMon) {
 			System.out.println ("Sorry you can't withdraw that much money because you don't have enougn in your bank account"); 
 		}
 		else if (cash<=currentMon) {
 			currentMon=currentMon-cash; 
-			bankAccounts.put(ident, currentMon); 
+			bankAccounts.put(id, currentMon); 
 		}	
 	}
-	public double checkBalance (String identification) {
-		if (bankAccounts.containsKey(identification)==false) {
-			System.out.println("Sorry this is not a valid ID."); 
-			return -1.0; 
+	public String checkBalance (String id) {
+		if (bankAccounts.containsKey(id)==false) {
+			return "Sorry this is not a valid ID."; 
 		}
 		else {
-			return (bankAccounts.get(identification)); 
+			return (""+(bankAccounts.get(id))); 
 		}
 	}
 	public static void main (String [] args)
@@ -61,7 +60,7 @@ public class atm {
 		cash.withdraw("MrTheiss", 443964.46);
 		System.out.println(cash.checkBalance("Bezos")); 
 		System.out.println(cash.checkBalance("Winfrey")); 
-		cash.checkBalance("YoMama");
+		System.out.println (cash.checkBalance("YoMama"));
 		System.out.println(cash.checkBalance("MrTheiss"));
 	}
 }
